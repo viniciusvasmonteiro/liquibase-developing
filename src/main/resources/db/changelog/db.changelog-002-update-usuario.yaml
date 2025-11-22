@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: vinicius
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              CREATE TYPE tipo_usuario AS ENUM ('ADMIN', 'COMUM');
+
+  - changeSet:
+      id: 3
+      author: vinicius
+      changes:
+        - addColumn:
+            tableName: usuario
+            columns:
+              - column:
+                  name: tipo
+                  type: tipo_usuario
+                  constraints:
+                    nullable: false

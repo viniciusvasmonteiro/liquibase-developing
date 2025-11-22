@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: vinicius
+      changes:
+        - insert:
+            tableName: usuario
+            columns:
+              - column:
+                  name: nome
+                  value: "Admin do Sistema"
+              - column:
+                  name: email
+                  value: "admin@sistema.com"
+              - column:
+                  name: tipo
+                  value: "ADMIN"
+
+  - changeSet:
+      id: 5
+      author: vinicius
+      changes:
+        - insert:
+            tableName: usuario
+            columns:
+              - column:
+                  name: nome
+                  value: "João Silva"
+              - column:
+                  name: email
+                  value: "joao@exemplo.com"
+              - column:
+                  name: tipo
+                  value: "COMUM"
+
+  - changeSet:
+      id: 6
+      author: vinicius
+      changes:
+        - insert:
+            tableName: usuario
+            columns:
+              - column:
+                  name: nome
+                  value: "bianca Oliveira"
+              - column:
+                  name: email
+                  value: "bianca@exemplo.com"
+              - column:
+                  name: tipo
+                  value: "COMUM"
