@@ -1,10 +1,75 @@
 # 1. Introdução
-Este documento tem como objetivo registrar todo o processo de desenvolvimento do banco de dados da API do 5º semestre de Banco de Dados. O conteúdo abrange tanto o banco relacional quanto o Data Warehouse, destacando suas estruturas, integrações e implementações. Além disso, busca promover a integração entre todos os participantes do projeto dentro da aplicação dos conceitos de DevOps, garantindo rastreabilidade, colaboração e consistência no desenvolvimento. 
 
-# 2. Desenvolvido por
+Este documento apresenta a função de Database no ambiente DevOps da equipe Neo Horizon, assegurando consistência, rastreabilidade e manutenção das estruturas do Data Warehouse (DW) e do banco relacional.
+O objetivo é detalhar as decisões técnicas, ferramentas e processos de automação utilizados no controle de versões do banco.
+
+# 2. Seção: DevOps
+## 2.1 Visão Geral
+
+O DevOps foi implementado para garantir controle de mudanças, padronização e integração contínua entre o banco de dados e as demais camadas do sistema (backend, frontend e ETL).
+
+### Conceito aplicado
+
+- Controle de versões do BD: As alterações estruturais são registradas e aplicadas automaticamente por meio do Liquibase.
+
+- Integração à pipeline CI/CD: O Liquibase foi incorporado ao fluxo de build do Maven, garantindo consistência entre os ambientes.
+
+### Objetivo
+
+Permitir rastreabilidade, auditoria e automação das migrações do banco de dados sem comprometer a integridade dos demais componentes.
+
+### Implementação
+
+- Sprint 1: Controle de versão inicial via Hibernate ORM.
+
+- Sprint 2: Transição para Liquibase para gerenciamento de migrações automatizadas.
+
+- Sprint 3: Integração do Liquibase à pipeline CI/CD (Maven).
+
+### Desafios e soluções
+
+- **Desafio:** Falta de rastreabilidade nas alterações de schema.
+<br>
+**Solução:** Adoção do Liquibase para versionamento centralizado.
+
+- **Desafio**: Integração com o pipeline automatizado.
+<br>**Solução:** Configuração de execução via Maven (liquibase:update).
+
+### Justificativas
+
+O Liquibase foi escolhido por oferecer controle granular de mudanças, suporte nativo a PostgreSQL e integração direta com Maven e ferramentas DevOps.
+
+### Decisões de arquitetura
+
+- Banco de dados PostgreSQL.
+
+- Versionamento de schema via Liquibase YAML.
+
+- Execução automatizada em pipeline CI/CD.
+
+# 3. Seção: Produto
+### Regras de Desenvolvimento **(ajustar com equipe)**
+
+- Todas as alterações de banco de dados devem ser versionadas.
+
+- Utilizar convenção vX.Y.sql para versionamento manual e changelogs YAML para o Liquibase.
+
+### Solução do Produto
+
+O Data Warehouse consolida informações de múltiplas origens, promovendo performance, consistência e rastreabilidade.
+
+### Diagrama de Arquitetura e Compatibilidades
+
+| Versão V2.0 | Data do deploy: 05/11/2025
+
+DER V1.0
 
 
-# 3. Modelos do Banco de Dados
+
+
+
+
+# 2. Modelos do Banco de Dados
 ### Versão 1
   <a href="https://github.com/FatecNeoHorizon/API_5S/blob/main/docs/Data%20Warehouse/V1.0/DER_database_V01..png">DER</a>
   <br>
@@ -15,9 +80,9 @@ Este documento tem como objetivo registrar todo o processo de desenvolvimento do
   <br>
   <a href="https://github.com/FatecNeoHorizon/API_5S/blob/main/docs/Data%20Warehouse/V2.0/DDL_database_V02.sql">DDL</a>
 
-# 4. Seção: **DevOps**
+# 3. Seção: **DevOps**
 
-## 4.1 Integração do Banco de Dados à Pipeline de DevOps
+## 3.1 Integração do Banco de Dados à Pipeline de DevOps
 
 Iniciamos o projeto utilizando o esquema de *migration* do **Hibernate ORM** como forma de gerenciar as alterações na base de dados.  
 No entanto, visando uma melhor integração do banco de dados à pipeline de DevOps, optamos por substituí-lo pelo **Liquibase**.  
@@ -26,7 +91,7 @@ Essa mudança proporcionou um controle de versão mais eficiente das tabelas, al
 
 ---
 
-## 4.2 Configuração do Liquibase
+## 3.2 Configuração do Liquibase
 
 Em um primeiro momento, é necessário adicionar a dependência do Liquibase no arquivo `pom.xml` do projeto:
 
